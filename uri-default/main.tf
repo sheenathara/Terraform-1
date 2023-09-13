@@ -11,12 +11,12 @@ terraform {
 
 
 provider "aws" {
-  region  = "us-west-1"
+  region  = "us-east-1"
 }
 
 resource "aws_instance" "ec2test1" {
   instance_type = var.instance_type
-  ami           = "ami-0bf99cb24ac8fd2d2"
+  ami           = "ami-0aa7d40eeae50c9a9"
 #   subnet_id = aws_subnet.main.id
   tags = {
     name = "ec2test1"
