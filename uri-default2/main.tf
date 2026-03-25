@@ -11,35 +11,40 @@ terraform {
 
 
 provider "aws" {
-  region  = "us-west-2"
+  region  = "us-east-1"
 }
 
-resource "aws_vpc" "main" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
-
-  tags = {
-    Name = "main"
-  }
-}
-
-resource "aws_subnet" "main" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
-
-  tags = {
-    Name = "main"
-  }
-}
-
-resource "aws_instance" "ec2-be" {
-  instance_type = "t2.micro"
-  ami           = "ami-830c94e3"
+resource "aws_instance" "ec2test1" {
+  instance_type = var.instance_type
+  ami           = "ami-0aa7d40eeae50c9a9"
 #   subnet_id = aws_subnet.main.id
   tags = {
-    name = "ec2-be"
+    name = "ec2test1"
+    extra= var.extra
   }
 }
 
+resource "aws_s3_bucket" "s3_bucket" {
+  bucket_prefix = var.bucket_name
+  tags = var.tags
+}
 
+resource "aws_s3_bucket_website_configuration" "s3_bucket" {
+  bucket = aws_s3_bucket.s3_bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
+data "aws_subnets" "all" {
+  # Optional filter by VPC
+  filter {
+     name   = "vpc-id"
+     values = ["vpc-xxxxxxxx"]
+   }
+}
 
