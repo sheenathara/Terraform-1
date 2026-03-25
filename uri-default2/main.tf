@@ -44,7 +44,7 @@ data "aws_subnets" "all" {
   # Optional filter by VPC
   filter {
      name   = "vpc-id"
-     values = ["vpc-xxxxxxxx"]
+     values = var.vpcid
    }
 }
 
