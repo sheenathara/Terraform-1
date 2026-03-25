@@ -40,10 +40,12 @@ resource "aws_s3_bucket_website_configuration" "s3_bucket" {
     key = "error.html"
   }
 }
-data "aws_subnets" "all" {
-  filter {
-    name   = "vpc-id"
-    values = [var.vpcid]
-  }
-}
+#  data "aws_subnets" "all" {
+#    filter {
+#      name   = "vpc-id"
+#      values = [var.vpcid]
+#    }
+#  }
+
+data "aws_subnets" "all" {}
 
