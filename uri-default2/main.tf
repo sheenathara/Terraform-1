@@ -41,10 +41,9 @@ resource "aws_s3_bucket_website_configuration" "s3_bucket" {
   }
 }
 data "aws_subnets" "all" {
-  # Optional filter by VPC
   filter {
-     name   = "vpc-id"
-     values = var.vpcid
-   }
+    name   = "vpc-id"
+    values = [var.vpcid]
+  }
 }
 
