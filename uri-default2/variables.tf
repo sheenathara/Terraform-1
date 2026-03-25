@@ -11,7 +11,7 @@ variable "extra1" {
 variable "instance_type" {
     type = string
 }
-variable "vpcname" {
+variable "vpcid" {
     type = string
 }
 variable "bucket_name" {
